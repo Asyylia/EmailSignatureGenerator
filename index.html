@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Générateur de signature pour e-mail</title>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- FORMULAIRE -->
+      <section class="card">
+        <form id="sigForm">
+          <h1>Générateur de signature</h1>
+          <p class="sub">
+            Remplissez les champs puis cliquez sur <b>Générer</b>. Copiez
+            ensuite le code pour l'utiliser dans vos réglages de signature.
+          </p>
+
+          <div class="grid">
+            <div class="row">
+              <label for="prenom">Prénom</label>
+              <input id="prenom" name="prenom" placeholder="Prénom" required />
+            </div>
+            <div class="row">
+              <label for="nom">Nom</label>
+              <input id="nom" name="nom" placeholder="Nom" required />
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="row">
+              <label for="fonction">Fonction</label>
+              <input
+                id="fonction"
+                name="fonction"
+                placeholder="Fonction (ex: Chef de projet)"
+              />
+            </div>
+            <div class="row">
+              <label for="entreprise">Entreprise</label>
+              <input
+                id="entreprise"
+                name="entreprise"
+                placeholder="Entreprise (optionnel)"
+              />
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="row">
+              <label for="tel">Téléphone</label>
+              <input id="tel" name="tel" placeholder="+33 6 00 00 00 00" />
+            </div>
+            <div class="row">
+              <label for="email">E-mail</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="prenom.nom@domaine.com"
+              />
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="row">
+              <label for="adresse">Adresse</label>
+              <input
+                id="adresse"
+                name="adresse"
+                placeholder="Votre adresse - Code postal Ville"
+              />
+            </div>
+            <div class="row">
+              <label for="site">Site Web</label>
+              <input id="site" name="site" placeholder="www.votresite.fr" />
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="row">
+              <label for="logo">Logo ( URL publique )</label>
+              <input id="logo" name="logo" placeholder="https://.../logo.png" />
+            </div>
+            <div class="row">
+              <label for="couleur">Couleur d'accent</label>
+              <input id="couleur" name="couleur" type="color" value="#376644" />
+            </div>
+          </div>
+
+          <div class="grid grid-1">
+            <div class="row">
+              <label for="mentions">Mentions légales (facultatif)</label>
+              <textarea
+                name="mentions"
+                id="mentions"
+                placeholder="Mentions, slogan, confidentialité..."
+              ></textarea>
+            </div>
+          </div>
+        </form>
+
+        <div class="actions">
+          <button id="genBtn" class="secondary" type="button">Générer</button>
+          <button id="copyHtml" class="ghost" type="button">
+            Copier le code HTML
+          </button>
+          <button id="copyRich" type="button">
+            Copier la signature (riche)
+          </button>
+        </div>
+
+        <div class="notice">
+          Astuces compatibilité e-mail : les signatures utilisent une
+          <b>mise en forme par tableau</b> et des <b>styles en ligne</b>. Évitez
+          les polices externes et les images trop lourdes. Collez la version
+          <i>riche</i> si votre client le permet, sinon collez la version
+          <i>code HTML</i> dans les réglages avancés.
+        </div>
+      </section>
+
+      <!-- PREVIEW -->
+      <section class="card previewWrap">
+        <div class="previewHead">
+            <h2 style="margin:0; font-size: 18px;">Aperçu</h2>
+            <span class="small">L'aperçu simule un rendu dans un e-mail</span>
+        </div>
+
+        <div id="preview" class="preview"></div>
+        <h3 style="margin: 16px 0 8px; font-size: 16px;">Code HTML généré</h3>
+        <pre id="code" class="code">
+        <span class="small">Cliquez sur Générer...</span></pre>
+      </section>
+
+      <script></script>
+    </div>
+    <script src="assets/js/main.js" defer></script>
+  </body>
+</html>
