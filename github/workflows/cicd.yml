@@ -1,0 +1,44 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+env:
+# tout garder en minuscule pour GHCR ( Git Hub Container Registry)
+  IMAGE_NAME: ghcr.io/asyylia/emailsignaturegenerator:latest
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u asyylia --password-stdin
+
+      - name: Build IMAGE_NAME
+        run: docker push $IMAGE_NAME
+
+  deploy: 
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps: 
+     - name: Deploy over SSH (root)
+       uses: appleboy/ssh-action@v1.2.0
+       with: 
+        host: ${{ secrets.SSH_HOST }} 
+        username: ${{ secrets.SSH_USER }} # root
+        key: ${{ secrets.SSH_KEY }}       # clé privée OPENSSH (begin/end)
+        script: |
+          set -euo pipefail
+          echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u asyylia --password-stdin
+          docker rm -f maracorp_web 2>/dev/null || true
+          docker compose -f /opt/maracorp/docker-compose.yml pull
+          docker compose -f /opt/maracorp/docker-compose.yml up -d --remove-orphans --force-recreate
+          docker ps

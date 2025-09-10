@@ -1,0 +1,7 @@
+services:
+  web:
+    image: ghcr.io/asyylia/emailsignaturegenerator:latest
+    container_name: maracorp_web
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
