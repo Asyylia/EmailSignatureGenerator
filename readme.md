@@ -13,3 +13,10 @@ Ce projet a pour utilité, comme son nom l'indique, de générer votre propre si
 - Générer le code HTML, ou la signature en riche.
 
 - Sur votre boîte mail ( GMAIL, OUTLOOK, etc.), insérer la signature dans le paramètre correspondant, afin qu'elle s'ajoute automatiquement à la fin de chaque mail expédié.
+
+
+## Signature - site statique
+Local:
+docker build -t maracorp-signature:dev
+docker run --rm -p 8081:80 maracorp-signature:dev
+## http://localhost:8081
