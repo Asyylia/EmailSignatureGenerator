@@ -22,7 +22,10 @@ jobs:
       - name: Log in to GHCR
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u asyylia --password-stdin
 
-      - name: Build IMAGE_NAME
+      - name: Build Docker image
+        run: docker build -t $IMAGE_NAME .
+
+      - name: Push Docker image
         run: docker push $IMAGE_NAME
 
   deploy: 
