@@ -42,6 +42,6 @@ jobs:
           set -euo pipefail
           echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u asyylia --password-stdin
           docker rm -f maracorp_web 2>/dev/null || true
-          docker compose -f /opt/maracorp/docker-compose.yml pull
-          docker compose -f /opt/maracorp/docker-compose.yml up -d --remove-orphans --force-recreate
+          docker compose -f /opt/static/docker-compose.yml pull
+          docker compose -f /opt/static/docker-compose.yml up -d --remove-orphans --force-recreate
           docker ps
